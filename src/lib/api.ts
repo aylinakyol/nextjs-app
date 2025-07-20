@@ -1,0 +1,41 @@
+const PAYLOAD_API_URL = 'http://localhost:3000/api';
+
+export async function getLatestPosts() {
+  const res = await fetch(`${PAYLOAD_API_URL}/posts?limit=10`);
+  console.log(res);
+  if (!res.ok) throw new Error('Veriler alınamadı');
+  const data = await res.json();
+  console.log(data);
+  return data.docs;
+}
+
+export async function getPostBySlug(slug: string) {
+  const res = await fetch(`${PAYLOAD_API_URL}/posts?where[slug][equals]=${slug}`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  
+  return data.docs?.[0] || null;
+}
+
+export async function getPostsByCategorySlug(slug: string) {
+  try {
+    console.log('Fonksiyon başladı, slug:', slug)
+    console.log('PAYLOAD_API_URL:', PAYLOAD_API_URL)
+
+    const categoryRes = await fetch(`${PAYLOAD_API_URL}/categories?where[slug][equals]=${slug}`)
+    const categoryData = await categoryRes.json()
+    console.log("kategori data", categoryData);
+    if (!categoryData.docs || categoryData.docs.length === 0) {
+      return []
+    }
+    const categoryId = categoryData.docs[0].id
+
+    const postsRes = await fetch(`${PAYLOAD_API_URL}/posts?where[category][equals]=${categoryId}`)
+    const postsData = await postsRes.json()
+
+    return postsData.docs || []
+  } catch (error) {
+    console.error('Hata:', error)
+    return []
+  }
+}

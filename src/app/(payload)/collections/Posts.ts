@@ -1,7 +1,11 @@
+import { lexicalHTML } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
 
 const Posts: CollectionConfig = {
   slug: 'posts',
+  access: {
+      read: () => true
+  },
   admin: {
     useAsTitle: 'title',
   },
@@ -19,7 +23,7 @@ const Posts: CollectionConfig = {
     },
     {
       type: 'relationship',
-      relationTo: 'users',
+      relationTo: 'authors',
       name: 'author',
       required: true,
     },
@@ -75,6 +79,19 @@ const Posts: CollectionConfig = {
       ],
     },
   ],
+  hooks: {
+    beforeChange: [
+      async ({ data }) => {
+        if (data.content) {
+          const html = lexicalHTML(data.content, {
+            name: ""
+          })
+          data.contentHTML = html
+        }
+        return data
+      },
+    ],
+  },
 };
 
 export default Posts;
