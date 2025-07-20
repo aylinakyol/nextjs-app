@@ -1,5 +1,6 @@
 const PAYLOAD_API_URL = 'http://localhost:3000/api';
 
+
 export async function getLatestPosts() {
   const res = await fetch(`${PAYLOAD_API_URL}/posts?limit=10`);
   console.log(res);
@@ -8,6 +9,7 @@ export async function getLatestPosts() {
   console.log(data);
   return data.docs;
 }
+
 
 export async function getPostBySlug(slug: string) {
   const res = await fetch(`${PAYLOAD_API_URL}/posts?where[slug][equals]=${slug}`);

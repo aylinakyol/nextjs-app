@@ -3,6 +3,9 @@ import { GlobalConfig } from "payload";
 const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Site Settings',
+  access: {
+      read: () => true
+  },
   fields: [
     {
       name: 'siteTitle',
