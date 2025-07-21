@@ -4,11 +4,9 @@ import useTheme from '@/lib/useTheme';
 import Layout from '@/components/Layout';
 
 export default function CategoryPage({ posts, slug }: { posts: any[], slug: string }) {
-  const { theme, toggleTheme } = useTheme();
 
   console.log(posts);
   return (
-    <Layout>
     <div className="p-8">
       <h1 className="text-xl font-bold mb-4">Kategori: {slug}</h1>
       <ul className="space-y-2">
@@ -22,7 +20,6 @@ export default function CategoryPage({ posts, slug }: { posts: any[], slug: stri
         ))}
       </ul>
     </div>
-    </Layout>
   )
 }
 

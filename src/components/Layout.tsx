@@ -1,11 +1,8 @@
 // components/Layout.tsx
 import { useState, useEffect } from 'react';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -34,9 +31,6 @@ export default function Layout({ children }: LayoutProps) {
             {darkMode ? '🌞 Light Mode' : '🌙 Dark Mode'}
           </button>
         </div>
-        
-        {/* Sayfa İçeriği */}
-        {children}
       </div>
     </div>
   );

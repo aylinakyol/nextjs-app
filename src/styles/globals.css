@@ -1,7 +1,109 @@
-@import "tailwindcss";
+/* styles/globals.css */
+
+/* Sadece tema ve yardımcı sınıfları içe aktar, Preflight'ı hariç tut */
+@import "tailwindcss" layer(theme, utilities);
+
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+html, body {
+  @apply m-0 p-0 h-full;
+}
+
+body {
+  @apply flex justify-center items-center min-h-screen;
+}
+
+@theme {  --font-display: "Satoshi", "sans-serif";  --breakpoint-3xl: 1920px;  --color-avocado-100: oklch(0.99 0 0);  --color-avocado-200: oklch(0.98 0.04 113.22);  --color-avocado-300: oklch(0.94 0.11 115.03);  --color-avocado-400: oklch(0.92 0.19 114.08);  --color-avocado-500: oklch(0.84 0.18 117.33);  --color-avocado-600: oklch(0.53 0.12 118.34);  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);  /* ... */}
+@theme {
+  --color-primary: 220 80% 50%; /* Example: Your custom primary HSL color */
+  --color-accent: 30 90% 60%;  /* Example: Your custom accent HSL color */
+}
+
+@layer base {
+  body {
+    @apply font-sans text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 transition-colors duration-200;
+  }
+  h2 {
+    color: theme('colors.red.400');
+  }
+  h1 {
+    margin-top: 1rem;
+  }
+}
+
+.flex-row-center {
+  @apply flex flex-row items-center gap-4;
+}
+
+
+.navbar {
+  @apply bg-white dark:bg-gray-900 shadow-md;
+}
+
+.nav-list {
+  @apply flex space-x-4 p-2 max-w-3xl mx-auto items-center;
+}
+
+.nav-link {
+  @apply inline-block px-3 py-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium;
+  margin-right: 1rem;
+}
+
+
+
+.nav-link-active {
+  @apply font-bold underline decoration-2 underline-offset-4 text-blue-700 dark:text-blue-400;
+}
+
+@layer components {
+  .post-card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 transition hover:shadow-lg;
+  }
+
+  .heading-center {
+    @apply text-center text-2xl font-extrabold mt-4 mb-4;
+    margin-bottom: 2rem;
+  }
+
+  .head-underline {
+    @apply font-bold underline decoration-2 underline-offset-4
+  }
+
+  .post-title {
+    @apply text-center font-sans font-bold text-gray-900 dark:text-white mb-2;
+  }
+
+  .post-date {
+    @apply text-sm text-gray-500 dark:text-gray-400 mb-2;
+  }
+
+  .post-excerpt {
+    @apply text-gray-700 dark:text-gray-300 mb-4;
+  }
+
+}
+.post-link {
+  @apply text-blue-600 dark:text-blue-400 hover:underline font-medium;
+}
+
+
+
+body {
+  @apply font-sans text-gray-900 bg-white;
+}
+
+
+/* @theme direktifiniz burada kalabilir */
+@theme {
+  --color-primary: 220 80% 50%;
+  --color-accent: 30 90% 60%;
+}
+
+
 
 :root {
-  --background: #ffffff;
+  --background: #dcd2d2;
   --foreground: #171717;
 }
 

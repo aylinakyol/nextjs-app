@@ -16,13 +16,14 @@ export default function PostCard({ post }: { post: Post }) {
   }, [post.createdAt]);
 
   return (
-    <div className="border rounded-xl p-4 shadow hover:shadow-lg transition mb-4">
-      <h2 className="text-xl font-bold">{post.title}</h2>
-      <p className="text-sm text-gray-500">{formattedDate || ''}</p>
-      {post.excerpt && <p className="mt-2 text-gray-700">{post.excerpt}</p>}
-      <a href={`/posts/${post.slug}`} className="text-blue-600 hover:underline mt-2 inline-block">
+    <div className="post-card">
+      <h2 className="post-title">{post.title}</h2>
+      <p className="post-date">{formattedDate}</p>
+      {post.excerpt && <p className="post-excerpt">{post.excerpt}</p>}
+      <a href={`/posts/${post.slug}`} className="post-link">
         Devamını oku →
       </a>
     </div>
+
   );
 }

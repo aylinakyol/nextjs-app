@@ -3,7 +3,14 @@ const PAYLOAD_API_URL = 'http://localhost:3000/api';
 
 export async function getLatestPosts() {
   const res = await fetch(`${PAYLOAD_API_URL}/posts?limit=10`);
-  console.log(res);
+  if (!res.ok) throw new Error('Veriler alınamadı');
+  const data = await res.json();
+  console.log(data);
+  return data.docs;
+}
+
+export async function getCategories() {
+  const res = await fetch(`${PAYLOAD_API_URL}/categories?limit=10`);
   if (!res.ok) throw new Error('Veriler alınamadı');
   const data = await res.json();
   console.log(data);
