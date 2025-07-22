@@ -5,7 +5,7 @@ Bu proje, **Next.js** frontend'i ile **Payload CMS** backend'ini entegre ederek 
 ## 🔗 Canlı Demo
 
 Frontend (Vercel): [https://your-vercel-link.vercel.app](https://your-vercel-link.vercel.app)  
-Backend (Payload Admin Panel): [https://your-backend-url.com/admin](https://your-backend-url.com/admin)
+Backend (Payload Admin Panel): [https://your-backend-url.com/admin](http://localhost:3000/admin)
 
 > GitHub: [https://github.com/aylinakyol/nextjs-app](https://github.com/aylinakyol/nextjs-app)
 
