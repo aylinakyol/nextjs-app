@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📰 Next.js Blog with Payload CMS
 
-## Getting Started
+Bu proje, **Next.js** frontend'i ile **Payload CMS** backend'ini entegre ederek oluşturulmuş modern, hızlı ve özelleştirilebilir bir blog platformudur. Statik site üretimi (SSG), Incremental Static Regeneration (ISR), dinamik tema desteği ve üçüncü parti API entegrasyonu gibi ileri seviye özellikler içerir.
 
-First, run the development server:
+## 🔗 Canlı Demo
+
+Frontend (Vercel): [https://your-vercel-link.vercel.app](https://your-vercel-link.vercel.app)  
+Backend (Payload Admin Panel): [https://your-backend-url.com/admin](https://your-backend-url.com/admin)
+
+> GitHub: [https://github.com/aylinakyol/nextjs-app](https://github.com/aylinakyol/nextjs-app)
+
+---
+
+## 🏗️ Proje Yapısı
+
+### 📦 Backend (Payload CMS)
+
+Backend, Payload CMS kullanılarak oluşturulmuştur. Aşağıdaki veri modellerini içerir:
+
+- **Posts (Yazılar)**: `title`, `slug`, `author`, `category`, `content`, `seo` alanlarını içerir.
+- **Categories (Kategoriler)**: `name`, `slug`
+- **Authors (Yazarlar)**: `name`, `avatar`
+- **Globals - SiteSettings**: `siteTitle`, `description`, `themeColors` gibi genel ayarlar
+
+### 🌐 Frontend (Next.js)
+
+Frontend, Next.js kullanılarak geliştirilmiştir ve statik olarak üretilecek sayfaları içerir:
+
+- `/`: Ana sayfa, son yazıları ve “Günün Sözü”nü listeler (`getStaticProps`)
+- `/posts/[slug]`: Tek bir yazının detayını gösterir (`getStaticProps` & `getStaticPaths`)
+- `/category/[slug]`: Kategoriye ait tüm yazıları gösterir (`getStaticProps` & `getStaticPaths`)
+
+---
+
+## 🚀 Gelişmiş Özellikler (Challenges)
+
+- ✅ **Incremental Static Regeneration (ISR)**: Sayfalar belirli aralıklarla yeniden oluşturulur (`revalidate`)
+- ✅ **Dinamik Tema Değiştirme**: Light/Dark mod geçişi ve `localStorage` ile kalıcılık sağlandı
+- ✅ **Üçüncü Parti API**: Zen Quotes API ile "Günün Sözü" asenkron olarak çekiliyor
+
+---
+
+## 🛠️ Kurulum
+
+### 1. Backend (Payload CMS)
 
 ```bash
+cd payload-backend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+* MongoDB bağlantısı ve .env tanımlamaları
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Frontend (Next.js)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd nextjs-app
+npm install
+npm run dev
+```
+* Tailwind css kurulumu ve darkMode: class kullanımı
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 Karşılaşılan Zorluklar
 
-## Learn More
+    Payload verilerinin Lexical rich text formatında işlenmesi ve frontend'de HTML'e çevrilmesi.
 
-To learn more about Next.js, take a look at the following resources:
+    getStaticPaths ve getStaticProps ile dinamik yolların doğru oluşturulması.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Light/Dark tema geçişinde Tailwind ile class temelli dark mode yönetimi.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Tailwind ile versiyon uyumluluk sorunları.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    External API requesti için yeni bir API endpoint yazılması.
