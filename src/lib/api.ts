@@ -1,7 +1,7 @@
 const PAYLOAD_API_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/api'
-    : `${process.env.NEXT_PUBLIC_SITE_URL}/api`;
+    : `${process.env.NEXT_PUBLIC_API_URL}`;
 
 
 export async function getLatestPosts() {
