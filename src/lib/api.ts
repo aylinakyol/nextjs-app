@@ -20,6 +20,14 @@ export async function getCategories() {
   return data.docs;
 }
 
+export async function getQuote() {
+  const res = await fetch(`${PAYLOAD_API_URL}/daily-quote`);
+  if (!res.ok) throw new Error('Veriler alınamadı');
+  const data = await res.json();
+  console.log(data); // <- bu artık doğrudan array olacak
+  return data[0] || null;
+}
+
 
 export async function getPostBySlug(slug: string) {
   const res = await fetch(`${PAYLOAD_API_URL}/posts?where[slug][equals]=${slug}`);

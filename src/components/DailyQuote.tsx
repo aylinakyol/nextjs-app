@@ -1,34 +1,52 @@
-import { useEffect, useState } from 'react';
+// pages/daily-quote.tsx
+import { GetStaticProps } from 'next';
 
-export default function GununSozu() {
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+type Quote = {
+  q: string;
+  a: string;
+  h: string;
+};
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/daily-quote')
-      .then((res) => {
-        if (!res.ok) throw new Error('Veri alınamadı');
-        return res.json();
-      })
-      .then((data) => {
-        setQuote(data[0].q);
-        setAuthor(data[0].a);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+type Props = {
+  quote: string;
+  author: string;
+};
 
-  if (loading) return <p>Yükleniyor...</p>;
-  if (error) return <p>Hata: {error}</p>;
-
+export default function DailyQuote({ quote, author }: Props) {
   return (
-    <blockquote style={{ fontStyle: 'italic', borderLeft: '4px solid #ccc', margin: '1rem', paddingLeft: '1rem' }}>
+    <blockquote
+      style={{
+        fontStyle: 'italic',
+        borderLeft: '4px solid #ccc',
+        margin: '1rem',
+        paddingLeft: '1rem',
+      }}
+    >
       "{quote}" — <footer>{author}</footer>
     </blockquote>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const res = await fetch(`${process.env.PAYLOAD_API_URL}/daily-quote`);
+    if (!res.ok) throw new Error('Veri alınamadı');
+    const data: Quote[] = await res.json();
+    const daily = data[0];
+
+    return {
+      props: {
+        quote: daily?.q || 'Alıntı bulunamadı',
+        author: daily?.a || 'Bilinmeyen',
+      },
+      revalidate: 86400, // 1 gün (isteğe bağlı)
+    };
+  } catch (error) {
+    return {
+      props: {
+        quote: 'Alıntı alınamadı.',
+        author: '',
+      },
+    };
+  }
+};
