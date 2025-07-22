@@ -13,7 +13,7 @@ export default function HomePage({ posts }: HomePageProps) {
     <main>
       <DailyQuote />
 
-      <h2 className='head-underline'>Son Yazılar</h2>
+      <h1 className='head-underline'>Latest Posts</h1>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useTheme from '@/lib/useTheme';
 import Layout from './Layout';
 
 export default function Navigation() {
   const router = useRouter();
-  const { theme, toggleTheme } = useTheme();
   const slug = "1";
 
   return (
@@ -16,7 +14,7 @@ export default function Navigation() {
             href="/"
             className={`nav-link ${router.pathname === '/' ? 'nav-link-active' : ''}`}
           >
-            Ana Sayfa
+            Home Page
           </Link>
           <Link
             href="/category"

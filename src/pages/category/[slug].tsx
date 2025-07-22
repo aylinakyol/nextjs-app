@@ -1,14 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getPostsByCategorySlug } from '@/lib/api'
-import useTheme from '@/lib/useTheme';
-import Layout from '@/components/Layout';
+import { getCategoryBySlug } from '@/lib/api'
 
-export default function CategoryPage({ posts, slug }: { posts: any[], slug: string }) {
+export default function CategoryPage({ posts, category }: { posts: any[], category: any }) {
 
-  console.log(posts);
   return (
     <div className="p-8">
-      <h1 className="text-xl font-bold mb-4">Kategori: {slug}</h1>
+      <h1 className="text-xl font-bold mb-4">Kategori: {category}</h1>
       <ul className="space-y-2">
         {posts.length === 0 && <li>Bu kategoriye ait post bulunamadı.</li>}
         {posts.map((post) => (
@@ -28,8 +26,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log('getStaticProps çağrıldı, slug:', params?.slug)
   const slug = params?.slug as string
-  const posts = await getPostsByCategorySlug(slug)
-  return { props: { posts, slug }, revalidate: 60 } //ISR
+  const category = await getCategoryBySlug(slug);
+  console.log(category);
+  const posts = await getPostsByCategorySlug(slug);
+  return { props: { posts, category }, revalidate: 60 } //ISR
 }

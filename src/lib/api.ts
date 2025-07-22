@@ -26,6 +26,14 @@ export async function getPostBySlug(slug: string) {
   return data.docs?.[0] || null;
 }
 
+export async function getCategoryBySlug(slug: string) {
+  const res = await fetch(`${PAYLOAD_API_URL}/categories?where[slug][equals]=${slug}`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  
+  return data.docs?.[0].name || null;
+}
+
 export async function getPostsByCategorySlug(slug: string) {
   try {
     console.log('Fonksiyon başladı, slug:', slug)
