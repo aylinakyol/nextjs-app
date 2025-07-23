@@ -8,7 +8,7 @@ export default function CategoryPage({ posts, category }: { posts: any[], catego
     <div className="p-8">
       <h1 className="text-xl font-bold mb-4">Kategori: {category}</h1>
       <ul className="space-y-2">
-        {posts.length === 0 && <li>Bu kategoriye ait post bulunamadı.</li>}
+        {posts.length === 0 && <li>Post not found.</li>}
         {posts.map((post) => (
           <li key={post.id}>
             <a href={`/posts/${post.slug}`} className="text-blue-600 underline">

@@ -1,5 +1,5 @@
   import { GetStaticPaths, GetStaticProps } from 'next';
-  import { getPostBySlug, getLatestPosts, getAuthorById } from '@/lib/api';
+  import { getPostBySlug, getLatestPosts, getAuthorBySlug } from '@/lib/api';
   import Head from 'next/head';
   
 
@@ -60,7 +60,7 @@
   export default function PostDetail({ post, author }: PostDetailProps) {
 
     if (!post) return <div className="text-center mt-10">Post is not found.</div>;
-    console.log(author);
+    
     return (
       <>
         <Head>
@@ -73,10 +73,6 @@
           </h1>
 
           <SimpleRichTextRenderer content={post.content} />
-
-          <p className="text-center text-sm text-gray-500">
-            by {author?.name || 'Unknown Author'}
-          </p>
         </main>
       </>
     );
@@ -96,7 +92,7 @@
     const slug = params?.slug as string;
     const post = await getPostBySlug(slug);
     const authorId = typeof post.author === 'string' ? post.author : post.author?.id;
-    const author = await getAuthorById(authorId);
+    const author = await getAuthorBySlug(authorId);
 
     if (!post) {
       return { notFound: true };
