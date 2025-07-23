@@ -32,12 +32,19 @@ export async function getQuote() {
 
 
 export async function getPostBySlug(slug: string) {
-  const res = await fetch(`${PAYLOAD_API_URL}/posts?where[slug][equals]=${slug}`);
+  const res = await fetch(`${PAYLOAD_API_URL}/posts?where[slug][equals]=${slug}&depth=2`);
   if (!res.ok) return null;
   const data = await res.json();
   
   return data.docs?.[0] || null;
 }
+
+export async function getAuthorById(id: string) {
+  const res = await fetch(`${PAYLOAD_API_URL}/users/${id}`);
+  const data = await res.json();
+  return data;
+}
+
 
 export async function getCategoryBySlug(slug: string) {
   const res = await fetch(`${PAYLOAD_API_URL}/categories?where[slug][equals]=${slug}`);

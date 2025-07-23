@@ -4,8 +4,8 @@ Bu proje, **Next.js** frontend'i ile **Payload CMS** backend'ini entegre ederek 
 
 ## 🔗 Canlı Demo
 
-Frontend (Vercel): [https://your-vercel-link.vercel.app](https://your-vercel-link.vercel.app)  
-Backend (Payload Admin Panel): [https://your-backend-url.com/admin](http://localhost:3000/admin)
+Frontend (Vercel): [https://nextjs-app-kwk4.vercel.app/](https://nextjs-app-kwk4.vercel.app/)  
+Backend (Payload Admin Panel): [https://nexus-news-git-master-aylin-akyols-projects.vercel.app/admin](https://nexus-news-git-master-aylin-akyols-projects.vercel.app/admin)
 
 > GitHub: [https://github.com/aylinakyol/nextjs-app](https://github.com/aylinakyol/nextjs-app)
 
